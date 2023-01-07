@@ -12,10 +12,11 @@ export async function getStaticProps() {
 
   // Use regex to find all words in bible
   const regex = /\w+/gi;
-  const bibleWords = bible.match(regex);
-  // Get rid of duplicates
-  const bibleWordsSet = new Set(bibleWords);
-  const bibleWordsNoDuplicates = Array.from(bibleWordsSet);
+  const bibleWords = bible.match(regex) ?? [];
+  // Get rid of duplicates, and make all lowercase
+  const bibleWordsNoDuplicates = Array.from(
+    new Set(bibleWords.map((word) => word.toLowerCase()))
+  );
 
   return {
     props: {
@@ -68,7 +69,10 @@ export default function Home({
       return;
     }
     const totalWords = textWords.length;
-    const union = textWords.filter((word) => bibleWordsSet.has(word));
+    // Find union, but make all lowercase first to avoid false negatives
+    const union = textWords
+      .map((word) => word.toLowerCase())
+      .filter((word) => bibleWordsSet.has(word));
     const totalUnionWords = union.length;
     console.log({ union });
 
@@ -80,7 +84,10 @@ export default function Home({
     <>
       <Head>
         <title>None of those words are in the bible</title>
-        <meta name="description" content="Check whether any of those words are in the bible" />
+        <meta
+          name="description"
+          content="Check whether any of those words are in the bible"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
