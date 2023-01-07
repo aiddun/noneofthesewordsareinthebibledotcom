@@ -94,9 +94,10 @@ export default function Home({
       <main>
         {/* Website that checks how many words from a paragraph are in the bible. */}
         {/* Website design: Title, text box, percentage result on bottom, all horizontlaly and vertically centered */}
+        {/* Support mobile */}
         {/* Tailwind styles */}
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-          <h1 className="text-6xl font-bold">
+        <div className="flex flex-col items-center justify-center min-h-screen py-2 mx-12 md:mx-5">
+          <h1 className="text-3xl md:text-6xl font-bold">
             {`
             ${
               bibleStats.percentage === 0 ? "None" : `${bibleStats.percentage}%`
@@ -104,7 +105,7 @@ export default function Home({
             of those words are in the bible`}
           </h1>
           <textarea
-            className="w-96 h-96 p-4 border-2 border-black"
+            className="w-[90%] md:w-96 h-96 p-4 border-2 border-black"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
