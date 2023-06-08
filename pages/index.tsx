@@ -108,6 +108,7 @@ export default function Home({
             className="w-[90%] md:w-96 h-96 p-4 border-2 border-black"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            autofocus={true}
           />
           <p className="text-4xl font-bold">
             {bibleStats.totalUnionWords} words
